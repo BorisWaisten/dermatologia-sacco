@@ -1,8 +1,33 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import { socialLinks } from "@/data/siteContent";
 
 const SocialLinks = () => {
+  const [isActive, setIsActive] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (
+        navRef.current &&
+        !navRef.current.contains(event.target as Node) &&
+        isActive
+      ) {
+        setIsActive(false);
+      }
+    };
+
+    if (isActive) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isActive]);
   const socials = [
     {
       label: "Socials",
@@ -47,13 +72,28 @@ const SocialLinks = () => {
 
   return (
     <nav
+      ref={navRef}
       className="relative"
       style={{ "--count": socials.length } as React.CSSProperties}
+      onMouseEnter={() => {
+        // En desktop, activar con hover
+        if (window.matchMedia("(hover: hover)").matches) {
+          setIsActive(true);
+        }
+      }}
+      onMouseLeave={() => {
+        // Solo cerrar en desktop
+        if (window.matchMedia("(hover: hover)").matches) {
+          setIsActive(false);
+        }
+      }}
     >
       <ul
-        className="inline-grid grid-flow-col list-none p-0 transition-[grid-template-columns] duration-[350ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:[--active:1] focus-within:[--active:1]"
+        className="inline-grid grid-flow-col list-none p-0 transition-[grid-template-columns] duration-[350ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:[--active:1] focus-within:[--active:1] touch-manipulation"
         style={{
-          gridTemplateColumns: `auto repeat(3, calc(var(--active, 0) * 130px + 10px))`,
+          gridTemplateColumns: `auto repeat(3, calc(var(--active, ${isActive ? 1 : 0}) * 130px + 10px))`,
+          touchAction: "manipulation",
+          "--active": isActive ? 1 : undefined,
         } as React.CSSProperties}
       >
         {socials.map((social) => (
@@ -70,11 +110,16 @@ const SocialLinks = () => {
                 href={social.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-block px-4 py-2 m-0 rounded-xl bg-[color:var(--brand-charcoal)]/18 text-[color:var(--brand-espresso)] text-sm font-normal backdrop-blur-[40px] transition-colors duration-200 hover:bg-[color:var(--brand-espresso)] hover:text-[color:var(--brand-ivory)] focus-visible:outline-transparent"
+                className="inline-block px-4 py-2 m-0 rounded-xl bg-[color:var(--brand-charcoal)]/18 text-[color:var(--brand-espresso)] text-sm font-normal backdrop-blur-[40px] transition-colors duration-200 hover:bg-[color:var(--brand-espresso)] hover:text-[color:var(--brand-ivory)] active:bg-[color:var(--brand-espresso)] active:text-[color:var(--brand-ivory)] focus-visible:outline-transparent touch-manipulation"
+                style={{ touchAction: "manipulation" }}
               >
                 <span
-                  className={`grid items-center grid-flow-col gap-3 [grid-template-columns:24px_1fr] ${
-                    social.index > 1 ? "opacity-[var(--active,0)]" : ""
+                  className={`grid items-center grid-flow-col gap-3 [grid-template-columns:24px_1fr] transition-opacity duration-300 ${
+                    social.index > 1
+                      ? isActive
+                        ? "opacity-100"
+                        : "opacity-[var(--active,0)]"
+                      : ""
                   }`}
                 >
                   <span className="h-6 w-6 fill-current">{social.icon}</span>
@@ -82,12 +127,23 @@ const SocialLinks = () => {
                 </span>
               </a>
             ) : (
-              <div className="inline-block px-4 py-2 m-0 rounded-xl bg-[color:var(--brand-charcoal)]/18 text-[color:var(--brand-espresso)] text-sm font-normal backdrop-blur-[40px]">
+              <button
+                type="button"
+                onClick={() => setIsActive(!isActive)}
+                onTouchStart={(e) => {
+                  e.stopPropagation();
+                  setIsActive(true);
+                }}
+                className="inline-block px-4 py-2 m-0 rounded-xl bg-[color:var(--brand-charcoal)]/18 text-[color:var(--brand-espresso)] text-sm font-normal backdrop-blur-[40px] cursor-pointer touch-manipulation hover:bg-[color:var(--brand-espresso)] hover:text-[color:var(--brand-ivory)] active:bg-[color:var(--brand-espresso)] active:text-[color:var(--brand-ivory)] transition-colors duration-200"
+                style={{ touchAction: "manipulation" }}
+                aria-label="Toggle redes sociales"
+                aria-expanded={isActive}
+              >
                 <span className="grid items-center grid-flow-col gap-3 [grid-template-columns:24px_1fr]">
                   <span className="h-6 w-6 fill-current">{social.icon}</span>
                   {social.label}
                 </span>
-              </div>
+              </button>
             )}
           </li>
         ))}

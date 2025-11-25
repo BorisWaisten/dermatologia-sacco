@@ -43,30 +43,14 @@ export const dermatologiaEstetica = {
   id: "dermatologia-estetica",
   title: "Dermatología Estética",
   description:
-    "Participé en congresos internacionales y capacitaciones de vanguardia en medicina estética para ofrecer técnicas seguras, mínimamente invasivas y adaptadas a cada necesidad.",
+    "En paralelo me forme en Medicina Estética participando de diversos congresos y capacitaciones de vanguardia en el cuidado de la piel y tratamientos antiage.",
+  secondParagraph:
+    "Me especializo en tratamientos inyectables utilizando productos de primera calidad, logrando con los mismos resultados naturales y adaptados a cada necesidad.",
   treatments: [
-    "Botox y Xeomin para relajar líneas de expresión.",
-    "Rellenos de Ácido Hialurónico Juvederm (Volbella, Volift, Voluma).",
-    "Rellenos de Ácido Hialurónico Belotero (Balance, Intense, Volume).",
-    "Bioestimulación con Radiesse, Sculpra y HarmonyCa.",
-    "Protocolos glow skin para mejorar textura y luminosidad.",
-  ],
-  pillars: [
-    {
-      title: "Resultados naturales",
-      copy:
-        "Buscamos acompañar los rasgos propios del paciente, manteniendo armonía y frescura.",
-    },
-    {
-      title: "Protocolos personalizados",
-      copy:
-        "Cada plan se diseña tras una evaluación clínica completa y fotografías de diagnóstico.",
-    },
-    {
-      title: "Productos premium",
-      copy:
-        "Trabajamos con laboratorios de primera línea para asegurar durabilidad y seguridad.",
-    },
+    "Botox y Xeomin",
+    "Rellenos de Ácido Hialuronico Juvederm Volbella, Volift y Voluma",
+    "Bioestimulación con Radiesse, Sculpra y HarmonyCa",
+    "Evaluación por Ecografía de Complicaciones Estéticas",
   ],
 };
 

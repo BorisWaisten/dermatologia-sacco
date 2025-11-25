@@ -47,7 +47,7 @@ const ClinicaSection = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.4 + index * 0.05 }}
                 >
-                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[color:var(--brand-espresso)]" />
+                  <span className="mt-2 p-[2.5] h-1.5 w-1.5 rounded-full bg-[color:var(--brand-espresso)]" />
                   <span>{item}</span>
                 </motion.li>
               ))}
@@ -73,7 +73,7 @@ const ClinicaSection = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
                 >
-                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[color:var(--brand-espresso)]" />
+                  <span className="mt-2 p-[2.5] h-1.5 w-1.5 rounded-full bg-[color:var(--brand-espresso)]" />
                   <span>{item}</span>
                 </motion.li>
               ))}

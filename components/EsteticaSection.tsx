@@ -14,7 +14,7 @@ const EsteticaSection = () => {
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6 }}
     >
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[1fr,0.9fr]">
+      <div className="mx-auto max-w-6xl px-6 py-16 space-y-8">
         <SectionHeading
           eyebrow="Medicina estética"
           title={dermatologiaEstetica.title}
@@ -27,49 +27,43 @@ const EsteticaSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
+          {dermatologiaEstetica.secondParagraph && (
+            <motion.p
+              className="text-lg leading-relaxed text-[color:var(--brand-charcoal)]/90"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              {dermatologiaEstetica.secondParagraph}
+            </motion.p>
+          )}
           <motion.div
             className="rounded-3xl border border-[color:var(--brand-sand)]/40 bg-[color:var(--brand-ivory)]/60 p-6 shadow-sm"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <p className="text-sm uppercase tracking-[0.4em] text-[color:var(--brand-espresso)]/70">
-              Protocolos en consultorio
+            <p className="text-sm uppercase tracking-[0.4em] text-[color:var(--brand-espresso)]/70 mb-4">
+              Encontrás en mi consultorio:
             </p>
-            <ul className="mt-4 list-disc space-y-3 pl-4 text-[color:var(--brand-charcoal)]/90">
+            <ul className="space-y-3 text-[color:var(--brand-charcoal)]/90">
               {dermatologiaEstetica.treatments.map((item, index) => (
                 <motion.li
                   key={item}
+                  className="flex gap-2"
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.4 + index * 0.05 }}
+                  transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
                 >
-                  {item}
+                  <span className="mt-2 p-[2.5] h-1.5 w-1.5 rounded-full bg-[color:var(--brand-espresso)] flex-shrink-0" />
+                  <span>{item}</span>
                 </motion.li>
               ))}
             </ul>
           </motion.div>
-          <div className="grid gap-4 md:grid-cols-3">
-            {dermatologiaEstetica.pillars.map((pillar, index) => (
-              <motion.article
-                key={pillar.title}
-                className="rounded-2xl border border-[color:var(--brand-blush)]/60 bg-white p-4 shadow-sm"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-              >
-                <h3 className="font-heading text-xl text-[color:var(--brand-espresso)]">
-                  {pillar.title}
-                </h3>
-                <p className="mt-2 text-sm text-[color:var(--brand-charcoal)]/80">
-                  {pillar.copy}
-                </p>
-              </motion.article>
-            ))}
-          </div>
         </motion.div>
       </div>
     </motion.section>
