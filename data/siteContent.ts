@@ -84,8 +84,8 @@ export const contactContent = {
   channels: [
     {
       label: "Consultorio",
-      value: "Av. Triunvirato 3629, CABA",
-      href: "https://maps.google.com/?q=Av.+Triunvirato+3629,+CABA",
+      value: "Av Triunvirato 4021 1ro B",
+      href: "https://maps.google.com/?q=Av.+Triunvirato+4021+1ro+B,+CABA",
       type: "location",
     },
     {
@@ -103,7 +103,7 @@ export const contactContent = {
   ],
   officeHours: "Turnos con cita previa · Lunes a Viernes",
   mapEmbed:
-    "https://www.google.com/maps?q=Av.+Triunvirato+3629,+CABA&output=embed",
+    "https://www.google.com/maps?q=Av.+Triunvirato+4021+1ro+B,+CABA&output=embed",
 };
 
 export const socialLinks = {

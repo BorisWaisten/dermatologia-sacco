@@ -35,7 +35,7 @@ const ClinicaSection = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <p className="text-sm uppercase tracking-[0.4em] text-[color:var(--brand-espresso)]/70">
-              Áreas de enfoque
+              Subespecialidades
             </p>
             <ul className="mt-4 space-y-3 text-[color:var(--brand-charcoal)]/90">
               {dermatologiaClinica.focusAreas.map((item, index) => (

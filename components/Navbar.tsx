@@ -41,13 +41,6 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="#contacto"
-            className="rounded-full bg-espresso px-5 py-3 text-sm uppercase tracking-[0.25em] text-white"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Agendar
-          </Link>
         </nav>
         <button
           className="md:hidden"
