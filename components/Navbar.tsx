@@ -13,13 +13,13 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 border-b border-(--brand-espresso)/10 bg-(--brand-charcoal)/90 backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 ">
         <Link href="#inicio" className="flex items-center gap-3">
-          <div className="relative  overflow-hidden">
+          <div className="relative overflow-hidden">
             <Image
-              src="/LOGO-DRSACCO.svg"
+              src="/logo-blanco.png"
               alt="Logo Dra. Natalia Sacco"
               width={140}
               height={140}
-              className="object-contain w-[180px] h-[80px] md:w-[350px] md:h-[120px] scale-[2] "
+              className="object-contain w-[150px] h-[90px] md:w-[200px] md:h-[100px]"
             />
           </div>
         </Link>
