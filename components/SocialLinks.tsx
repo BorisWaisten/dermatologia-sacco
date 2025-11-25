@@ -19,14 +19,18 @@ const SocialLinks = () => {
     };
 
     if (isActive) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("touchstart", handleClickOutside);
-    }
+      // Usar un pequeño delay para evitar que el touch que abre el menú lo cierre inmediatamente
+      const timeoutId = setTimeout(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("touchend", handleClickOutside);
+      }, 100);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-    };
+      return () => {
+        clearTimeout(timeoutId);
+        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener("touchend", handleClickOutside);
+      };
+    }
   }, [isActive]);
   const socials = [
     {
@@ -111,7 +115,11 @@ const SocialLinks = () => {
                 target="_blank"
                 rel="noreferrer noopener"
                 className="inline-block px-4 py-2 m-0 rounded-xl bg-[color:var(--brand-charcoal)]/18 text-[color:var(--brand-espresso)] text-sm font-normal backdrop-blur-[40px] transition-colors duration-200 hover:bg-[color:var(--brand-espresso)] hover:text-[color:var(--brand-ivory)] active:bg-[color:var(--brand-espresso)] active:text-[color:var(--brand-ivory)] focus-visible:outline-transparent touch-manipulation"
-                style={{ touchAction: "manipulation" }}
+                style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
+                onTouchStart={(e) => {
+                  // Prevenir el menú contextual en touch
+                  e.stopPropagation();
+                }}
               >
                 <span
                   className={`grid items-center grid-flow-col gap-3 [grid-template-columns:24px_1fr] transition-opacity duration-300 ${
@@ -129,13 +137,19 @@ const SocialLinks = () => {
             ) : (
               <button
                 type="button"
-                onClick={() => setIsActive(!isActive)}
-                onTouchStart={(e) => {
+                onClick={() => {
+                  // Solo toggle en desktop o si no hay touch
+                  if (!('ontouchstart' in window)) {
+                    setIsActive(!isActive);
+                  }
+                }}
+                onTouchEnd={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
-                  setIsActive(true);
+                  setIsActive(!isActive);
                 }}
                 className="inline-block px-4 py-2 m-0 rounded-xl bg-[color:var(--brand-charcoal)]/18 text-[color:var(--brand-espresso)] text-sm font-normal backdrop-blur-[40px] cursor-pointer touch-manipulation hover:bg-[color:var(--brand-espresso)] hover:text-[color:var(--brand-ivory)] active:bg-[color:var(--brand-espresso)] active:text-[color:var(--brand-ivory)] transition-colors duration-200"
-                style={{ touchAction: "manipulation" }}
+                style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
                 aria-label="Toggle redes sociales"
                 aria-expanded={isActive}
               >
